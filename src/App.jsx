@@ -3,11 +3,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 import About from "./pages/About";
-import { Contacts } from "./pages/Contacts";
+
 import Cart from "./pages/Cart";
 import Navbar from "./components/Navbar";
 import axios from "axios";
 import Footer from "./components/Footer";
+import Contacts from "./pages/Contacts";
+import SingleProduct from "./pages/SingleProduct";
 
 function App() {
   const [location, setLocation] = useState();
@@ -42,6 +44,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/products" element={<Product />}></Route>
+        <Route path="/products/:id" element={<SingleProduct />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/contact" element={<Contacts />}></Route>
         <Route path="/cart" element={<Cart />}></Route>

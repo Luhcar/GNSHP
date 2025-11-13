@@ -25,10 +25,9 @@ export const DataProvider = ({ children }) => {
     return newVal;
   };
   const categoryOnlyData = getUniqueCategory(data, "category");
-  const categoryOnlyPrice = getUniqueCategory(data, "price");
 
   return (
-    <DataContext.Provider value={{ data, setData, fetchAllProducts, categoryOnlyData, categoryOnlyPrice }}>
+    <DataContext.Provider value={{ data, setData, fetchAllProducts, categoryOnlyData }}>
       {children}
     </DataContext.Provider>
   );

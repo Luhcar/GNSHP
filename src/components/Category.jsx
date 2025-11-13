@@ -3,8 +3,7 @@ import { getData } from "../context/DataContext";
 
 const Category = () => {
   const { data, fetchAllProducts, categoryOnlyData } = getData();
-
-  console.log(categoryOnlyData);
+  // console.log(categoryOnlyData);
 
   // useEffect(() => {
   //   fetchAllProducts();

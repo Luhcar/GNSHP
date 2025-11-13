@@ -17,6 +17,7 @@ const Product = () => {
 
   useEffect(() => {
     fetchAllProducts();
+    window.scrollTo(0, 0);
   }, []);
 
   const handleCategoryChange = (e) => {
@@ -59,8 +60,8 @@ const Product = () => {
                   <div className="grid grid-cols-4 gap-7 mt-10">
                     {filteredData
                       ?.slice(page * 8 - 8, page * 8)
-                      .map((product, index) => {
-                        return <ProductCard key={index} product={product} />;
+                      .map((item, index) => {
+                        return <ProductCard key={index} product={item} />;
                       })}
                   </div>
                   <Pagination
