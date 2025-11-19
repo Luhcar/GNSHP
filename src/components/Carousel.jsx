@@ -101,7 +101,7 @@ const Carousel = () => {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-[300px] hover:scale-107 transition duration-400"
+                    className="w-[250px] max-h-[350px] md:w-[300px] md:max-h-[400px] hover:scale-107 transition duration-400"
                   />
                 </div>
               </div>

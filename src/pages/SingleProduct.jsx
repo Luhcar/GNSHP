@@ -4,11 +4,12 @@ import { useParams } from "react-router-dom";
 import Loading from "../assets/video/Loading4.webm";
 import Breadcrums from "../components/Breadcrums";
 import { IoCartOutline } from "react-icons/io5";
+import { useCart } from "../context/CartContext";
 
 const SingleProduct = () => {
   const params = useParams();
   const [singleProduct, setSingleProduct] = useState("");
-  console.log(params);
+  const { addToCart } = useCart();
 
   const getSingleProduct = async () => {
     try {
@@ -27,16 +28,12 @@ const SingleProduct = () => {
     getSingleProduct();
   }, []);
 
-  const OriginalPrice = Math.round(
-    singleProduct.price + (singleProduct.price * singleProduct.discount) / 100
-  );
-
   return (
     <>
       {singleProduct ? (
-        <div className="px-4 pb-4 ">
+        <div className="px-4 pb-4">
           <Breadcrums title={singleProduct.title} />
-          <div className="max-w-6xl mx-auto md:p-6 grid grid-cols-2 gap-10">
+          <div className="max-w-6xl mx-auto md:p-6 grid grid-cols-1 md:grid-cols-2 gap-10">
             {/* Product Image  */}
             <div className="w-full">
               <img
@@ -48,7 +45,7 @@ const SingleProduct = () => {
 
             {/* Product Details  */}
             <div className="flex flex-col gap-6">
-              <h1 className="font-bold md:text-3xl text-gray-800">
+              <h1 className="font-bold text-xl md:text-3xl text-gray-800">
                 {singleProduct.title}
               </h1>
               <div className="text-gray-700">
@@ -73,8 +70,8 @@ const SingleProduct = () => {
                 />
               </div>
               <div className="flex gap-4 mt-4">
-                <button className=" flex px-6 py-2 gap-2 text-lg bg-red-500 text-white rounded-md cursor-pointer">
-                  <IoCartOutline className="w-6 h-6"/> Add to Cart
+                <button onClick={()=>addToCart(singleProduct)} className=" flex px-6 py-2 gap-2 text-lg bg-red-500 text-white rounded-md cursor-pointer">
+                  <IoCartOutline className="w-6 h-6" /> Add to Cart
                 </button>
               </div>
             </div>

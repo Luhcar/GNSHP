@@ -14,7 +14,7 @@ const FilterSection = ({
   // console.log(categoryOnlyData);
 
   return (
-    <div className="bg-gray-100 mt-10 p-4 rounded-md h-max">
+    <div className="bg-gray-100 mt-10 p-4 rounded-md h-max hidden md:block">
       <input
         type="text"
         placeholder="Search.."

@@ -10,14 +10,19 @@ import { CgClose } from "react-icons/cg";
 import { FaCaretDown } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+import { HiMenuAlt1, HiMenuAlt3 } from "react-icons/hi";
+import ResponsiveMenu from "./ResponsiveMenu";
 
 const Navbar = ({ location, getLocation, dropDown, setDropDown }) => {
-  
+  const { cartItems } = useCart();
+  const [openNav, setOpenNav] = useState(false);
+
   const toggleDropDown = () => {
     setDropDown(!dropDown);
   };
   return (
-    <div className="bg-white py-3 shadow-2xl">
+    <div className="bg-white py-3 shadow-2xl px-4 md:px-0">
       <div className="flex max-w-6xl mx-auto justify-between items-center">
         {/* Logo Scetion */}
         <div className="flex gap-7 items-center">
@@ -26,7 +31,7 @@ const Navbar = ({ location, getLocation, dropDown, setDropDown }) => {
               <span className="text-red-600 font-inter">gn</span>shp
             </h1>
           </Link>
-          <div className="flex text-gray-700 items-center cursor-pointer gap-2">
+          <div className="md:flex text-gray-700 items-center cursor-pointer gap-2 hidden">
             <MapPin className="text-red-500" />
             <span className="font-semibold">
               {location ? (
@@ -48,13 +53,18 @@ const Navbar = ({ location, getLocation, dropDown, setDropDown }) => {
                   <CgClose />
                 </span>
               </h1>
-              <button onClick={getLocation} className="bg-red-500 text-white py-1 px-3 rounded-md cursor-pointer hover:bg-red-400">Detect My Location</button>
+              <button
+                onClick={getLocation}
+                className="bg-red-500 text-white py-1 px-3 rounded-md cursor-pointer hover:bg-red-400"
+              >
+                Detect My Location
+              </button>
             </div>
           ) : null}
         </div>
         {/* Menu Section */}
         <nav className="flex items-center gap-7 font-poppins">
-          <ul className="flex gap-7 items-center text-[19px]">
+          <ul className="md:flex gap-7 items-center text-[19px] hidden ">
             <NavLink
               to={"/"}
               className={({ isActive }) =>
@@ -107,10 +117,10 @@ const Navbar = ({ location, getLocation, dropDown, setDropDown }) => {
           <Link to={"/cart"} className="relative">
             <IoCartOutline className="h-7 w-7" />
             <span className="bg-red-500 px-2 rounded-full absolute -top-3 -right-3 text-white">
-              0
+              {cartItems.length}
             </span>
           </Link>
-          <div className="">
+          <div className="hidden md:block">
             <SignedOut>
               <SignInButton className="bg-red-500 text-white px-3 py-1 rounded-md cursor-pointer" />
             </SignedOut>
@@ -118,8 +128,20 @@ const Navbar = ({ location, getLocation, dropDown, setDropDown }) => {
               <UserButton />
             </SignedIn>
           </div>
+          {openNav ? (
+            <HiMenuAlt3
+              onClick={() => setOpenNav(false)}
+              className="h-7 w-7 md:hidden"
+            />
+          ) : (
+            <HiMenuAlt1
+              onClick={() => setOpenNav(true)}
+              className="h-7 w-7 md:hidden"
+            />
+          )}
         </nav>
       </div>
+      <ResponsiveMenu openNav={openNav} setOpenNav={setOpenNav} />
     </div>
   );
 };
